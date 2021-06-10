@@ -1,11 +1,15 @@
 {
   "name": "codiv_pwa",
   "template": "Nuxt.js",
-  "modules": [],
+  "modules": [
+    "axios",
+    "pwa",
+    "tailwindcss"
+  ],
   "renderingMode": "universal",
   "deployTarget": "server",
   "isConfigured": {
-    "client": false,
-    "server": false
+    "client": true,
+    "server": true
   }
 }
