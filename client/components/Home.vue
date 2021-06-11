@@ -1,18 +1,46 @@
 <template>
     <div class="container">
-        <div class="relative inline-block w-full text-gray-700 md:w-1/4">
-            <select v-model="selected" class="form-select mt-10 block w-full border p-3 rounded" @change="onChange()">
-                <option value="0">Seleziona la Nazionalità</option>
-                <option v-for="post in posts" :value="post.ID" v-bind:key="post.ID">{{ post.Country }}</option>
+        <div class="relative inline-block w-full text-gray-700 md:w-1">
+            <h3>new deaths GLOBALY</h3>
+            <h3>{{ NewDeaths }}</h3>
+            <h3>Total deaths GLOBALY</h3>
+            <h3>{{ TotalDeaths }}</h3>
+        </div>
+        <div class="relative inline-block w-full text-gray-700 md:w-1">
+            <select v-model="country" class="form-select mt-10 block w-full border p-3 rounded" @change="getData">
+                <option value="">Seleziona la Nazionalità</option>
+                <option v-for="(list, index) in countryList" :value="list" v-bind:key="index">{{ list }}</option>
             </select>
+        </div>
+        <br />
+        <div class="relative inline-block w-full text-gray-700 md:w-1">
+            <h3>casi totali</h3>
+            <h3 v-if="cases == null && cases == 0">0</h3>
+            <h3 v-else>{{ cases }}</h3>
+        </div>
+        <div>
+            <h3>casi attuali</h3>
+            <h3 v-if="newCases == null">0</h3>
+            <h3 v-else>{{ newCases }}</h3>
+        </div>
+        <div>
+            <h3>total deaths</h3>
+            <h3 v-if="deaths == null">0</h3>
+            <h3 v-else>{{ deaths }}</h3>
+        </div>
+        <div>
+            <h3>new deaths</h3>
+            <h3 v-if="newDeaths == null">0</h3>
+            <h3 v-else>{{ newDeaths }}</h3>
+        </div>
+        <div>
+            <h3>date</h3>
+            <h3>{{ dataTime }}</h3>
         </div>
     </div>
 </template>
 
 <script>
-import Vue from 'vue'
-import axios from 'axios'
-Vue.prototype.$axios = window.axios
 export default {
     name: 'Home',
     data() {
@@ -20,67 +48,79 @@ export default {
             posts: {},
             Global: {},
             Countries: [],
-            Country: '',
             country: '',
+            countryList: '',
+            Country: '',
             Date: '',
+            deaths: '',
+            cases: '',
+            recovered: '',
+            newDeaths: '',
             NewDeaths: '',
             NewConfirmed: '',
             TotalDeaths: '',
             TotalConfirmed: '',
-            countries: '',
-            selected: 0,
-            onChange() {},
-        }
-    },
-    setup({ posts }, { emit }) {
-        const selected = 0
-        return {
-            selected,
-            onChange() {
-                const country = posts.find((item) => item.ID === selected.value)
-                emit('get-country', country)
-                console.log(selected.value)
-            },
+            total: '',
+            newCases: '',
+            dataTime: '',
         }
     },
     methods: {
-        getCountries() {
-            axios
-                .get('https://api.covid19api.com/summary', {
-                    Country: this.Country,
-                    NewDeaths: this.NewDeaths,
-                    NewConfirmed: this.NewConfirmed,
-                    TotalDeaths: this.TotalDeaths,
-                    TotalConfirmed: this.TotalConfirmed,
-                })
-                .then((res) => {
-                    console.log((this.posts = res.data))
-                    console.log((this.posts = res.data.Countries))
-                    return JSON.stringify((this.posts = res.data.Countries))
-                })
-                .catch((error) => {
-                    console.log(error)
-                })
-        },
-        /*
         getGlobal() {
-            axios
-                .get('https://api.covid19api.com/summary', {
-                    NewDeaths: this.NewDeaths,
-                })
-                .then((res) => {
-                    console.log((this.posts = res.data.Global))
-                    return JSON.stringify((this.posts = res.data.Global))
+            fetch('https://api.covid19api.com/summary')
+                .then((response) => response.json())
+                .then((data) => {
+                    this.NewDeaths = data.Global.NewDeaths
+                    this.TotalDeaths = data.Global.TotalDeaths
                 })
                 .catch((error) => {
                     console.log(error)
                 })
         },
-        */
+        getCountry() {
+            fetch('https://covid-193.p.rapidapi.com/countries', {
+                method: 'GET',
+                headers: {
+                    'x-rapidapi-key': '44058dce25msh3db8a329649904ap1c056ejsnd2c13f66af02',
+                    'x-rapidapi-host': 'covid-193.p.rapidapi.com',
+                },
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    this.countryList = data.response
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
+        },
+        getData() {
+            fetch('https://covid-193.p.rapidapi.com/statistics?country=' + this.country, {
+                method: 'GET',
+                headers: {
+                    'x-rapidapi-key': '44058dce25msh3db8a329649904ap1c056ejsnd2c13f66af02',
+                    'x-rapidapi-host': 'covid-193.p.rapidapi.com',
+                },
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data)
+                    data = data.response[0]
+                    this.cases = data.cases.total
+                    this.dataTime = data.day
+                    this.newCases = data.cases.new
+                    this.deaths = data.deaths.total
+                    this.newDeaths = data.deaths.new
+                    this.recovered = data.cases.recovered
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
+        },
     },
     mounted() {
-        this.getCountries()
-        // this.getGlobal()
+        this.getCountry()
+        this.getData()
+        this.getGlobal()
     },
 }
 </script>
