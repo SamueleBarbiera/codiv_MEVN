@@ -1,41 +1,68 @@
 <template>
-    <div class="container">
-        <div class="relative inline-block w-full text-gray-700 md:w-1">
-            <h3>new deaths GLOBALY</h3>
-            <h3>{{ NewDeaths }}</h3>
-            <h3>Total deaths GLOBALY</h3>
-            <h3>{{ TotalDeaths }}</h3>
-        </div>
-        <div class="relative inline-block w-full text-gray-700 md:w-1">
-            <select v-model="country" class="form-select mt-10 block w-full border p-3 rounded" @change="getData">
-                <option value="">Seleziona la Nazionalità</option>
+    <div class="flex flex-col align-center justify-center text-center">
+        <div class="form-select mt-6 block w-full border p-4 rounded">
+            <select v-model="country" class="form-select block w-full border p-4 rounded" @change="getData">
+                <option value="">Select the country</option>
                 <option v-for="(list, index) in countryList" :value="list" v-bind:key="index">{{ list }}</option>
             </select>
         </div>
         <br />
-        <div class="relative inline-block w-full text-gray-700 md:w-1">
-            <h3>casi totali</h3>
-            <h3 v-if="cases == null && cases == 0">0</h3>
-            <h3 v-else>{{ cases }}</h3>
+        <div class="grid sm:grid-cols gap-8">
+            <div class="shadow-md bg-blue-100 p-10 text-center p-4 rounded">
+                <h3 class="text-3xl text-blue-900 font-bold mb-4">Current Date</h3>
+                <div class="text-2xl mb-4">
+                    <h3 v-if="dataTime == ''" class="font-bold">{{ currentDate() }}</h3>
+                    <h3 v-else class="font-bold">{{ dataTime }}</h3>
+                </div>
+            </div>
         </div>
-        <div>
-            <h3>casi attuali</h3>
-            <h3 v-if="newCases == null">0</h3>
-            <h3 v-else>{{ newCases }}</h3>
+        <br />
+        <div class="grid lg:grid-cols gap-8">
+            <div class="shadow-md bg-blue-100 p-10 text-center rounded">
+                <h3 class="text-3xl text-blue-900 font-bold mb-4">Global</h3>
+                <div class="text-2xl mb-4">
+                    <span class="font-bold">New deaths</span>
+                    <h3>{{ NewDeaths }}</h3>
+                </div>
+                <div class="text-2xl mb-4">
+                    <span class="font-bold">Total deaths</span>
+                    <h3>{{ TotalDeaths }}</h3>
+                </div>
+            </div>
         </div>
-        <div>
-            <h3>total deaths</h3>
-            <h3 v-if="deaths == null">0</h3>
-            <h3 v-else>{{ deaths }}</h3>
-        </div>
-        <div>
-            <h3>new deaths</h3>
-            <h3 v-if="newDeaths == null">0</h3>
-            <h3 v-else>{{ newDeaths }}</h3>
-        </div>
-        <div>
-            <h3>date</h3>
-            <h3>{{ dataTime }}</h3>
+        <br />
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="shadow-md bg-blue-100 p-10 text-center rounded">
+                <h3 class="text-3xl text-blue-900 font-bold">Infected</h3>
+                <h3 v-if="country == ''" class="text-3xl text-red-900 font-bold mb-4">Select the NATION first</h3>
+                <h3 v-else class="text-3xl text-white-900 font-bold mb-4">in {{ country }}</h3>
+                <div class="text-2xl mb-4">
+                    <span class="font-bold">Current</span>
+                    <h3 v-if="newCases == null">0</h3>
+                    <h3 v-else>{{ newCases }}</h3>
+                </div>
+                <div class="text-2xl mb-4">
+                    <span class="font-bold">Total</span>
+                    <h3 v-if="cases == null && cases == 0">0</h3>
+                    <h3 v-else>{{ cases }}</h3>
+                </div>
+            </div>
+            <!-- Box 2 -->
+            <div class="shadow-md bg-blue-200 p-10 text-center rounded">
+                <h3 class="text-3xl text-blue-900 font-bold">Deaths</h3>
+                <h3 v-if="country == ''" class="text-3xl text-red-900 font-bold mb-4">Select the NATION first</h3>
+                <h3 v-else class="text-3xl text-white-900 font-bold mb-4">in {{ country }}</h3>
+                <div class="text-2xl mb-4">
+                    <span class="font-bold">Current</span>
+                    <h3 v-if="newDeaths == null">0</h3>
+                    <h3 v-else>{{ newDeaths }}</h3>
+                </div>
+                <div class="text-2xl mb-4">
+                    <span class="font-bold">Total</span>
+                    <h3 v-if="deaths == null">0</h3>
+                    <h3 v-else>{{ deaths }}</h3>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -52,20 +79,25 @@ export default {
             countryList: '',
             Country: '',
             Date: '',
-            deaths: '',
-            cases: '',
+            deaths: 0,
+            cases: 0,
             recovered: '',
-            newDeaths: '',
-            NewDeaths: '',
+            newDeaths: 0,
+            NewDeaths: 0,
             NewConfirmed: '',
-            TotalDeaths: '',
+            TotalDeaths: 0,
             TotalConfirmed: '',
             total: '',
-            newCases: '',
+            newCases: 0,
             dataTime: '',
         }
     },
     methods: {
+        currentDate() {
+            const current = new Date()
+            const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`
+            return date
+        },
         getGlobal() {
             fetch('https://api.covid19api.com/summary')
                 .then((response) => response.json())
@@ -107,6 +139,7 @@ export default {
                     data = data.response[0]
                     this.cases = data.cases.total
                     this.dataTime = data.day
+                    this.country = data.country
                     this.newCases = data.cases.new
                     this.deaths = data.deaths.total
                     this.newDeaths = data.deaths.new
