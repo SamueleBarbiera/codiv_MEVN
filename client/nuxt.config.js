@@ -8,7 +8,7 @@ export default {
      ** Nuxt target
      ** See https://nuxtjs.org/api/configuration-target
      */
-    target: 'static',
+    target: 'server',
     /*
      ** Headers of the page
      ** See https://nuxtjs.org/api/configuration-head
@@ -27,7 +27,6 @@ export default {
      ** https://nuxtjs.org/guide/plugins
      */
     plugins: [],
-    ssr: false,
     /*
      ** Auto import components
      ** See https://nuxtjs.org/api/configuration-components
@@ -57,5 +56,19 @@ export default {
         /*
          ** You can extend webpack config here
          */
+    },
+    pwa: {
+        meta: {
+            title: 'Covid Tracker',
+            author: 'Me',
+            background_color: '#2E98A7',
+        },
+        manifest: {
+            name: 'Covid Tracker',
+            short_name: 'Nuxt.js PWA',
+            lang: 'en',
+            display: 'standalone',
+            theme_color: '#2E98A7',
+        },
     },
 }
