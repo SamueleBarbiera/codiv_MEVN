@@ -32,43 +32,38 @@
                 </div>
             </div>
             <br />
-            <main v-if="!loading">
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div class="shadow-md bg-blue-100 p-10 text-center rounded">
-                        <h3 class="text-3xl text-blue-900 font-bold">Infected</h3>
-                        <h3 v-if="country == ''" class="text-3xl text-red-900 font-bold mb-4">Select the NATION first</h3>
-                        <h3 v-else class="text-3xl text-white-900 font-bold mb-4">in {{ country }}</h3>
-                        <div class="text-2xl mb-4">
-                            <span class="font-bold">Current</span>
-                            <h3 v-if="newCases == null">0</h3>
-                            <h3 v-else>{{ newCases }}</h3>
-                        </div>
-                        <div class="text-2xl mb-4">
-                            <span class="font-bold">Total</span>
-                            <h3 v-if="cases == null">0</h3>
-                            <h3 v-else>{{ cases }}</h3>
-                        </div>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="shadow-md bg-blue-100 p-10 text-center rounded">
+                    <h3 class="text-3xl text-blue-900 font-bold">Infected</h3>
+                    <h3 v-if="country == ''" class="text-3xl text-red-900 font-bold mb-4">Select the NATION first</h3>
+                    <h3 v-else class="text-3xl text-white-900 font-bold mb-4">in {{ country }}</h3>
+                    <div class="text-2xl mb-4">
+                        <span class="font-bold">Current</span>
+                        <h3 v-if="newCases == null">0</h3>
+                        <h3 v-else>{{ newCases }}</h3>
                     </div>
-                    <div class="shadow-md bg-blue-200 p-10 text-center rounded">
-                        <h3 class="text-3xl text-blue-900 font-bold">Deaths</h3>
-                        <h3 v-if="country == ''" class="text-3xl text-red-900 font-bold mb-4">Select the NATION first</h3>
-                        <h3 v-else class="text-3xl text-white-900 font-bold mb-4">in {{ country }}</h3>
-                        <div class="text-2xl mb-4">
-                            <span class="font-bold">Current</span>
-                            <h3 v-if="newDeaths == null">0</h3>
-                            <h3 v-else>{{ newDeaths }}</h3>
-                        </div>
-                        <div class="text-2xl mb-4">
-                            <span class="font-bold">Total</span>
-                            <h3 v-if="deaths == null">0</h3>
-                            <h3 v-else>{{ deaths }}</h3>
-                        </div>
+                    <div class="text-2xl mb-4">
+                        <span class="font-bold">Total</span>
+                        <h3 v-if="cases == null">0</h3>
+                        <h3 v-else>{{ cases }}</h3>
                     </div>
                 </div>
-            </main>
-            <main v-else>
-                <div>LOADING</div>
-            </main>
+                <div class="shadow-md bg-blue-200 p-10 text-center rounded">
+                    <h3 class="text-3xl text-blue-900 font-bold">Deaths</h3>
+                    <h3 v-if="country == ''" class="text-3xl text-red-900 font-bold mb-4">Select the NATION first</h3>
+                    <h3 v-else class="text-3xl text-white-900 font-bold mb-4">in {{ country }}</h3>
+                    <div class="text-2xl mb-4">
+                        <span class="font-bold">Current</span>
+                        <h3 v-if="newDeaths == null">0</h3>
+                        <h3 v-else>{{ newDeaths }}</h3>
+                    </div>
+                    <div class="text-2xl mb-4">
+                        <span class="font-bold">Total</span>
+                        <h3 v-if="deaths == null">0</h3>
+                        <h3 v-else>{{ deaths }}</h3>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
     <main v-else>
@@ -126,6 +121,7 @@ export default {
                 })
         },
         getCountry() {
+            this.loading = true
             fetch('https://covid-193.p.rapidapi.com/countries', {
                 method: 'GET',
                 headers: {
@@ -140,9 +136,11 @@ export default {
                 })
                 .catch((error) => {
                     console.log(error)
+                    this.loading = false
                 })
         },
         getData() {
+            this.loading = true
             fetch('https://covid-193.p.rapidapi.com/statistics?country=' + this.country, {
                 method: 'GET',
                 headers: {
@@ -165,6 +163,7 @@ export default {
                 })
                 .catch((error) => {
                     console.log(error)
+                    this.loading = false
                 })
         },
     },
