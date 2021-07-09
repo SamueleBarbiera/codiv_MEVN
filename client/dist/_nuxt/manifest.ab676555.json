@@ -1,0 +1,10 @@
+{
+  "name": "nuxt",
+  "short_name": "nuxt",
+  "description": "[MEVN-CLI](https://github.com/madlabsinc/mevn-cli)",
+  "icons": [],
+  "start_url": "/?standalone=true",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "lang": "en"
+}

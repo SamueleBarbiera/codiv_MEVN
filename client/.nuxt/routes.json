@@ -1,0 +1,16 @@
+[
+  {
+    "name": "link",
+    "path": "/link",
+    "component": "/mnt/c/Users/PC/Desktop/VUE/codiv_pwa/client/pages/link.vue",
+    "chunkName": "pages/link",
+    "_name": "_bc6d8f7c"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "/mnt/c/Users/PC/Desktop/VUE/codiv_pwa/client/pages/index.vue",
+    "chunkName": "pages/index",
+    "_name": "_6aa5d48c"
+  }
+]

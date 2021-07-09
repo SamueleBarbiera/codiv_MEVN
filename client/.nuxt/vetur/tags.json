@@ -1,0 +1,11 @@
+{
+  "Home": {
+    "description": "Auto imported from components/Home.vue"
+  },
+  "Nav": {
+    "description": "Auto imported from components/Nav.vue"
+  },
+  "PageNotFound": {
+    "description": "Auto imported from components/PageNotFound.vue"
+  }
+}
