@@ -12,11 +12,11 @@ import { setContext, getLocation, getRouteData, normalizeError } from './utils'
 
 /* Plugins */
 
-import nuxt_plugin_plugin_74ca3e8e from 'nuxt_plugin_plugin_74ca3e8e' // Source: ./components/plugin.js (mode: 'all')
-import nuxt_plugin_axios_ea4962b8 from 'nuxt_plugin_axios_ea4962b8' // Source: ./axios.js (mode: 'all')
-import nuxt_plugin_workbox_79daaa80 from 'nuxt_plugin_workbox_79daaa80' // Source: ./workbox.js (mode: 'client')
-import nuxt_plugin_metaplugin_11159c5a from 'nuxt_plugin_metaplugin_11159c5a' // Source: ./pwa/meta.plugin.js (mode: 'all')
-import nuxt_plugin_iconplugin_07c65172 from 'nuxt_plugin_iconplugin_07c65172' // Source: ./pwa/icon.plugin.js (mode: 'all')
+import nuxt_plugin_plugin_f265d0aa from 'nuxt_plugin_plugin_f265d0aa' // Source: ./components/plugin.js (mode: 'all')
+import nuxt_plugin_axios_e325a97e from 'nuxt_plugin_axios_e325a97e' // Source: ./axios.js (mode: 'all')
+import nuxt_plugin_workbox_299fd41d from 'nuxt_plugin_workbox_299fd41d' // Source: ./workbox.js (mode: 'client')
+import nuxt_plugin_metaplugin_53a5ae30 from 'nuxt_plugin_metaplugin_53a5ae30' // Source: ./pwa/meta.plugin.js (mode: 'all')
+import nuxt_plugin_iconplugin_584d53a4 from 'nuxt_plugin_iconplugin_584d53a4' // Source: ./pwa/icon.plugin.js (mode: 'all')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
@@ -66,7 +66,7 @@ async function createApp(ssrContext, config = {}) {
   // here we inject the router and store to all child components,
   // making them available everywhere as `this.$router` and `this.$store`.
   const app = {
-    head: {"title":"nuxt","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":"[MEVN-CLI](https:\u002F\u002Fgithub.com\u002Fmadlabsinc\u002Fmevn-cli)"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"}],"style":[],"script":[]},
+    head: {"title":"nuxt","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":""}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"}],"style":[],"script":[]},
 
     router,
     nuxt: {
@@ -180,24 +180,24 @@ async function createApp(ssrContext, config = {}) {
   }
   // Plugin execution
 
-  if (typeof nuxt_plugin_plugin_74ca3e8e === 'function') {
-    await nuxt_plugin_plugin_74ca3e8e(app.context, inject)
+  if (typeof nuxt_plugin_plugin_f265d0aa === 'function') {
+    await nuxt_plugin_plugin_f265d0aa(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_axios_ea4962b8 === 'function') {
-    await nuxt_plugin_axios_ea4962b8(app.context, inject)
+  if (typeof nuxt_plugin_axios_e325a97e === 'function') {
+    await nuxt_plugin_axios_e325a97e(app.context, inject)
   }
 
-  if (process.client && typeof nuxt_plugin_workbox_79daaa80 === 'function') {
-    await nuxt_plugin_workbox_79daaa80(app.context, inject)
+  if (process.client && typeof nuxt_plugin_workbox_299fd41d === 'function') {
+    await nuxt_plugin_workbox_299fd41d(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_metaplugin_11159c5a === 'function') {
-    await nuxt_plugin_metaplugin_11159c5a(app.context, inject)
+  if (typeof nuxt_plugin_metaplugin_53a5ae30 === 'function') {
+    await nuxt_plugin_metaplugin_53a5ae30(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_iconplugin_07c65172 === 'function') {
-    await nuxt_plugin_iconplugin_07c65172(app.context, inject)
+  if (typeof nuxt_plugin_iconplugin_584d53a4 === 'function') {
+    await nuxt_plugin_iconplugin_584d53a4(app.context, inject)
   }
 
   // Lock enablePreview in context

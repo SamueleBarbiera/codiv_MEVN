@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="container">
-            <Home />
+            <Login />
         </div>
         <br />
     </div>

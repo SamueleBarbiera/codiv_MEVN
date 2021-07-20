@@ -2,15 +2,22 @@
   {
     "name": "link",
     "path": "/link",
-    "component": "/mnt/c/Users/PC/Desktop/VUE/codiv_pwa/client/pages/link.vue",
+    "component": "/mnt/wsl/docker-desktop-bind-mounts/Ubuntu/cc5ab0790ea57466a2d08f9033b0f0d192d1d6adcb10754f9b3e876da3b9224e/pages/link.vue",
     "chunkName": "pages/link",
-    "_name": "_bc6d8f7c"
+    "_name": "_b549d642"
+  },
+  {
+    "name": "login",
+    "path": "/login",
+    "component": "/mnt/wsl/docker-desktop-bind-mounts/Ubuntu/cc5ab0790ea57466a2d08f9033b0f0d192d1d6adcb10754f9b3e876da3b9224e/pages/login.vue",
+    "chunkName": "pages/login",
+    "_name": "_02fe6fd4"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "/mnt/c/Users/PC/Desktop/VUE/codiv_pwa/client/pages/index.vue",
+    "component": "/mnt/wsl/docker-desktop-bind-mounts/Ubuntu/cc5ab0790ea57466a2d08f9033b0f0d192d1d6adcb10754f9b3e876da3b9224e/pages/index.vue",
     "chunkName": "pages/index",
-    "_name": "_6aa5d48c"
+    "_name": "_3956ccbd"
   }
 ]

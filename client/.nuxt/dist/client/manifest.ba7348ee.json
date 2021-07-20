@@ -1,7 +1,6 @@
 {
   "name": "Covid Tracker",
   "short_name": "Nuxt.js PWA",
-  "description": "[MEVN-CLI](https://github.com/madlabsinc/mevn-cli)",
   "icons": [
     {
       "src": "/_nuxt/icons/icon_64x64.3b6a64.png",

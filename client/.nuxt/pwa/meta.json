@@ -26,11 +26,6 @@
       "content": "Me"
     },
     {
-      "hid": "description",
-      "name": "description",
-      "content": "[MEVN-CLI](https://github.com/madlabsinc/mevn-cli)"
-    },
-    {
       "hid": "theme-color",
       "name": "theme-color",
       "content": "#2E98A7"
@@ -52,12 +47,6 @@
       "name": "og:site_name",
       "property": "og:site_name",
       "content": "Covid Tracker"
-    },
-    {
-      "hid": "og:description",
-      "name": "og:description",
-      "property": "og:description",
-      "content": "[MEVN-CLI](https://github.com/madlabsinc/mevn-cli)"
     }
   ],
   "link": [
@@ -74,7 +63,7 @@
     },
     {
       "rel": "manifest",
-      "href": "/_nuxt/manifest.7fdd9173.json",
+      "href": "/_nuxt/manifest.ba7348ee.json",
       "hid": "manifest"
     }
   ],
